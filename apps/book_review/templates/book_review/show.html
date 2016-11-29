@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SemiRestful</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'book_review/css/style.css' %}">
+  </head>
+  <body>
+    <h3>{{title}}</h3>
+    <p>Author: {{author}}</p>
+    <h3>Reviews</h3>
+    {% for review in reviews %}
+      <p><a href="{% url 'login_reg:show' id=review.user.id %}">{{review.user.first_name}}</a> says {{review.content}}</p>
+      {% if review.user.id == request.session.login_id %}
+        <a href="{% url 'book_review:delete' id=id %}">Delete</a>
+      {% endif %}
+    {% endfor %}
+
+    <a class="button" href="{% url 'book_review:index' %}">View All</a>
+  </body>
+</html>

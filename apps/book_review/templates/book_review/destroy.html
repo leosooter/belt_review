@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SemiRestful</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'book_review/css/style.css' %}">
+  </head>
+  <body>
+    <h3>Review id: {{id}}</h3>
+    
+    <h3 class="error">Are you sure you want to permanently delete this review?</h3>
+    <form class="delete" action="{% url 'book_review:destroy' id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" name="submit" value="Delete Review">
+    </form>
+    <a class="button" href="{% url 'book_review:index' %}">Cancel</a>
+  </body>
+</html>

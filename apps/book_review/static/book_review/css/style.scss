@@ -1,0 +1,35 @@
+body{
+  padding: 50px;
+}
+h1,h2,h3,h4,h5,h6{
+  display: inline-block;
+}
+a{
+  padding: 0 30px;
+  display: inline-block;
+  border: 1px solid rgb(202, 205, 223);
+}
+input{
+  display: block;
+}
+label{
+  display: block;
+}
+.product{
+  width: 50%;
+  min-width: 300px;
+  margin: 10px 0;
+  padding: 20px;
+  border: 1px solid rgb(181, 184, 200);
+}
+.button{
+  margin-top: 10px;
+  border-radius: 10%;
+  background-color: rgb(181, 184, 200);
+  border: 1px solid rgb(126, 127, 135);
+  text-decoration: none;
+  color: black;
+}
+.title_link{
+  text-decoration: none;
+}

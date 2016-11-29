@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SemiRestful</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'book_review/css/style.css' %}">
+  </head>
+  <body>
+    <h1>Add a New Book Title or a New Review</h1>
+    <form class="new_form" action="{% url 'book_review:create' %}" method="post">
+      {% csrf_token %}
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'title' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="title" placeholder="Book Title" value="{% for message in messages %}{% if message.extra_tags == 'title_value' %}{{message}}{% endif %}{% endfor %}">
+
+      <label for="author_list">Choose from the list</label>
+      <select class="author_select" name="author_list">
+          <option value="none">None</option>
+        {% for author in authors %}
+          <!-- The app does not allow two authors to share the same name. -->
+          <option value="{{author.name}}">{{author.name}}</option>
+        {% endfor %}
+      </select>
+
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'author_name' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="author_name" placeholder="Add a new Author" value="{% for message in messages %}{% if message.extra_tags == 'author_name_value' %}{{message}}{% endif %}{% endfor %}">
+
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'review' %}{{message}}{% endif %}{% endfor %}</p>
+      <textarea name="review" placeholder="Review" maxlength="200">{% for message in messages %}{% if message.extra_tags == 'review_value' %}{{message}}{% endif %}{% endfor %}</textarea>
+      <label for="rating">Rating</label>
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'rating' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="number" name="rating" min="1" max="5" value="{% for message in messages %}{% if message.extra_tags == 'rating_value' %}{{message}}{% endif %}{% endfor %}">
+
+      <input type="submit" name="submit" value="Add Book and Review">
+    </form>
+
+    <a class="button" href="{% url 'book_review:index' %}">Cancel</a>
+  </body>
+</html>
